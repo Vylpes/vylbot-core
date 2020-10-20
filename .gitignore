@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# VylBot-Core Testing Files
+commands/
+events/
+bot.js
+config.json
