@@ -7,8 +7,16 @@
     "test": "echo \"No Tests Specified\""
   },
   "author": "Vylpes",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^12.3.1"
-  }
+  },
+  "bugs": "https://github.com/vylpes/vylbot-core/issues",
+  "homepage": "https://github.com/vylpes/vylbot-core",
+  "keywords": [
+    "discord",
+    "bot",
+    "client"
+  ],
+  "repository": "github:vylpes/vylbot-core"
 }
