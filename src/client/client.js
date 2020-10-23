@@ -33,10 +33,10 @@ class client extends Client {
         if (typeof config.token != "string") throw "Token is not a string";
         if (typeof config.prefix != "string") throw "Prefix is not a string";
 
-        if (typeof config.commands != "string") throw "Commands is not a string";
+        if (typeof config.commands != "object") throw "Commands is not a string";
         if (!existsSync(`${process.cwd()}/${config.commands}`)) throw "Commands folder doesn't exist";
 
-        if (typeof config.events != "string") throw "Events is not a string";
+        if (typeof config.events != "object") throw "Events is not a string";
         if (!existsSync(`${process.cwd()}/${config.events}`)) throw "Events folder doesn't exist";
 
         this._config = config;
