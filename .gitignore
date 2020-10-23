@@ -108,3 +108,6 @@ commands/
 events/
 bot.js
 config.json
+
+# Linux Environment Files
+*.swp

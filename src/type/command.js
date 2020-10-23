@@ -1,6 +1,9 @@
 class command {
     constructor(run) {
         this.run = run;
+
+        this._roles = [];
+        this._requiredConfigs = [];
     }
 
     // Description
@@ -31,8 +34,6 @@ class command {
     }
 
     // Roles
-    _roles = [];
-
     get roles() {
         return this._roles;
     }
@@ -42,8 +43,6 @@ class command {
     }
 
     // Config
-    _requiredConfigs = [];
-
     get requiredConfigs() {
         return this._requiredConfigs;
     }

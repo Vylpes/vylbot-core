@@ -7,38 +7,42 @@ class util {
     }
 
     loadCommand(name, args, message) {
-        stat(`${process.cwd()}/${this._client.config.commands}/${name}.js`, (err, stat) => {
-            if (err == null) {
-                let commandFile = require(`${process.cwd()}/${this._client.config.commands}/${name}.js`);
-                let command = new commandFile();
+        for (let c = 0; c < this._client.config.commands.length; c++) {
+            let folder = this._client.config.commands[c];
+            
+            stat(`${process.cwd()}/${this._client.config.commands}/${name}.js`, (err, stat) => {
+                if (err == null) {
+                    let commandFile = require(`${process.cwd()}/${this._client.config.commands}/${name}.js`);
+                    let command = new commandFile();
                 
-                let requiredConfigs = command.requiredConfigs;
+                    let requiredConfigs = command.requiredConfigs;
                 
-                for (let i = 0; i < requiredConfigs.length; i++) {
-                    if (!this._client.config[name]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
-                    if (!this._client.config[name][requiredConfigs[i]]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
-                }
+                    for (let i = 0; i < requiredConfigs.length; i++) {
+                         if (!this._client.config[name]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
+                             if (!this._client.config[name][requiredConfigs[i]]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
+                         }
 
-                let requiredRoles = command.roles;
+                        let requiredRoles = command.roles;
 
-                for (let i = 0; i < requiredRoles.length; i++) {
-                    if (!message.member.roles.cache.find(role => role.name == requiredRoles[i])) {
-                        message.reply(`You require the \`${requiredRoles[i]}\` role to run this command`);
-                        return;
-                    }
-                }
+                        for (let i = 0; i < requiredRoles.length; i++) {
+                            if (!message.member.roles.cache.find(role => role.name == requiredRoles[i])) {
+                                message.reply(`You require the \`${requiredRoles[i]}\` role to run this command`);
+                                return;
+                            }
+                        }
                 
-                command[command.run]({
-                    "command": name,
-                    "arguments": args,
-                    "client": this._client,
-                    "message": message,
-                    "config": config
-                });
-            } else if (err.code === 'ENOENT') {
-                // FILE DOESN'T EXIST
-            }
-        });
+                     command[command.run]({
+                         "command": name,
+                         "arguments": args,
+                         "client": this._client,
+                         "message": message,
+                         "config": config
+                    });
+                 } else if (err.code === 'ENOENT') {
+                    // FILE DOESN'T EXIST
+                 }
+            });
+        }
     }
 
     loadEvents() {

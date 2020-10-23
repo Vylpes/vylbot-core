@@ -12,15 +12,19 @@ Copy the config template file and fill in the strings.
 {
     "token": "",
     "prefix": "",
-    "commands": "",
-    "events": ""
+    "commands": [
+        ""
+    ],
+    "events": [
+        ""
+    ]
 }
 ```
 
 * **Token:** Your bot's token
 * **Prefix** The command prefix
-* **Commands:** The folder name containing your commands
-* **Events:** The folder name containing your events
+* **Commands:** An array of the folders which contain your commands
+* **Events:** An array of the folders which contain your events
 
 ## Usage
 
