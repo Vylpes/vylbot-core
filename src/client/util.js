@@ -46,8 +46,8 @@ class util {
     }
 
     loadEvents() {
-        for (let e = 0; e < this._config.events.length; e++) {
-            let folder = this._config.events[e];
+        for (let e = 0; e < this._client.config.events.length; e++) {
+            let folder = this._client.config.events[e];
 
             let eventFiles = readdirSync(`${process.cwd()}/${folder}/`);
     
