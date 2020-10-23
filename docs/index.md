@@ -40,8 +40,12 @@ An example configuration:
 {
     "token": "<YOUR-BOT-TOKEN>",
     "prefix": "!",
-    "commands": "commands",
-    "events": "events"
+    "commands": [
+        "commands"
+    ],
+    "events": [
+        "events"
+    ]
 }
 ```
 
