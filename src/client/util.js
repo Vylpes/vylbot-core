@@ -12,7 +12,7 @@ class util {
 
             stat(`${process.cwd()}/${folder}/${name}.js`, (err, stat) => {
                 if (err == null) {
-                    let commandFile = require(`${process.cwd()}/${this._client.config.commands}/${name}.js`);
+                    let commandFile = require(`${process.cwd()}/${folder}/${name}.js`);
                     let command = new commandFile();
 
                     let requiredConfigs = command.requiredConfigs;
@@ -53,7 +53,7 @@ class util {
     
             for (let i = 0; i < eventFiles.length; i++) {
                 let eventName = eventFiles[i].split('.')[0];
-                let file = require(`${process.cwd()}/${this._client.config.events}/${eventName}.js`);
+                let file = require(`${process.cwd()}/${folder}/${eventName}.js`);
     
                 let event = new file;
     
