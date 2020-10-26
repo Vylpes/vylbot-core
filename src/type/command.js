@@ -4,6 +4,7 @@ class command {
 
         this._roles = [];
         this._requiredConfigs = [];
+        this._users = [];
     }
 
     // Description
@@ -49,6 +50,15 @@ class command {
 
     set requiredConfigs(conf) {
         this._requiredConfigs.push(conf);
+    }
+
+    // Users
+    get users() {
+        return this._users;
+    }
+
+    set users(userid) {
+        this._users.push(userid);
     }
 }
 

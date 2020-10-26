@@ -31,6 +31,13 @@ class util {
                             }
                         }
 
+                    let users = command.users;
+
+                    if (!users.includes(message.member.id)) {
+                        message.reply(`You do not have permission to run this command`);
+                        return;
+                    }
+
                      command[command.run]({
                          "command": name,
                          "arguments": args,
