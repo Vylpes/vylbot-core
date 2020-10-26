@@ -67,6 +67,7 @@ class test extends command {
         super.requiredConfigs = "link";
         super.roles = "Moderator";
         super.roles = "Admin";
+        super.users = "<ID-HERE>";
     }
 
     test(context) {
@@ -84,11 +85,15 @@ module.exports = test;
 
 > **Note:** You can set more than one role to be required by setting `super.roles` again.
 
-5. If you want the command to require a variable in the config, set the name in `super.requiredConfigs`
+5. If you want the command to only be ran by specific users, set their ID in `super.users`
+
+> **Note:** You can set more than one user to be required by settubg `super.users` again.
+
+6. If you want the command to require a variable in the config, set the name in `super.requiredConfigs`
 
 > **Note:** You can set more than one role to be required by setting `super.requiredConfigs` again.
 
-6. Create a method using the name you set in `super(run)`, with the `context` as its parameter.
+7. Create a method using the name you set in `super(run)`, with the `context` as its parameter.
 
 The `context` parameter will be a JSON object of:
 
