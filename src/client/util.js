@@ -9,14 +9,14 @@ class util {
     loadCommand(name, args, message) {
         for (let c = 0; c < this._client.config.commands.length; c++) {
             let folder = this._client.config.commands[c];
-            
-            stat(`${process.cwd()}/${this._client.config.commands}/${name}.js`, (err, stat) => {
+
+            stat(`${process.cwd()}/${folder}/${name}.js`, err => {
                 if (err == null) {
-                    let commandFile = require(`${process.cwd()}/${this._client.config.commands}/${name}.js`);
+                    let commandFile = require(`${process.cwd()}/${folder}/${name}.js`);
                     let command = new commandFile();
-                
+
                     let requiredConfigs = command.requiredConfigs;
-                
+
                     for (let i = 0; i < requiredConfigs.length; i++) {
                          if (!this._client.config[name]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
                              if (!this._client.config[name][requiredConfigs[i]]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
@@ -30,7 +30,14 @@ class util {
                                 return;
                             }
                         }
-                
+
+                    let users = command.users;
+
+                    if (!users.includes(message.member.id)) {
+                        message.reply(`You do not have permission to run this command`);
+                        return;
+                    }
+
                      command[command.run]({
                          "command": name,
                          "arguments": args,
@@ -46,15 +53,19 @@ class util {
     }
 
     loadEvents() {
-        let eventFiles = readdirSync(`${process.cwd()}/${this._client.config.events}/`);
+        for (let e = 0; e < this._client.config.events.length; e++) {
+            let folder = this._client.config.events[e];
 
-        for (let i = 0; i < eventFiles.length; i++) {
-            let eventName = eventFiles[i].split('.')[0];
-            let file = require(`${process.cwd()}/${this._client.config.events}/${eventName}.js`);
-            
-            let event = new file;
-
-            this._client.on(eventName, event[event.run]);
+            let eventFiles = readdirSync(`${process.cwd()}/${folder}/`);
+    
+            for (let i = 0; i < eventFiles.length; i++) {
+                let eventName = eventFiles[i].split('.')[0];
+                let file = require(`${process.cwd()}/${folder}/${eventName}.js`);
+    
+                let event = new file;
+    
+                this._client.on(eventName, event[event.run]);
+            }
         }
     }
 }
