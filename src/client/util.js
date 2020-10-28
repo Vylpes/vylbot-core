@@ -10,7 +10,7 @@ class util {
         for (let c = 0; c < this._client.config.commands.length; c++) {
             let folder = this._client.config.commands[c];
 
-            stat(`${process.cwd()}/${folder}/${name}.js`, (err) => {
+            stat(`${process.cwd()}/${folder}/${name}.js`, err => {
                 if (err == null) {
                     let commandFile = require(`${process.cwd()}/${folder}/${name}.js`);
                     let command = new commandFile();
