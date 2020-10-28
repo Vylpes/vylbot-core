@@ -38,7 +38,7 @@ const client = new vylbot.client(config);
 client.start();
 ```
 
-See the `docs` folder for more information on how to use vylbot-core
+See the [docs](https://github.com/Vylpes/vylbot-core/blob/main/docs/index.md) for more information on how to use vylbot-core
 
 ## Contributing
 
