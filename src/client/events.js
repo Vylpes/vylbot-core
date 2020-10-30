@@ -10,13 +10,13 @@ class event {
 	// Get the prefix from the config
         let prefix = this.config.prefix;
 
-	// If the message starts with the prefix, then treat it as a command
+        // If the message starts with the prefix, then treat it as a command
         if (message.content.substring(0, prefix.length).toLowerCase() == prefix.toLowerCase()) {
             // Get the arguments in the message, after the first space (after the command name)
             let args = message.content.substring(prefix.length).split(" ");
             let name = args.shift();
 
-	    // Load the command from the util class
+            // Load the command from the util class
             this.util.loadCommand(name, args, message);
         }
     }
