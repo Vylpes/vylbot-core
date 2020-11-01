@@ -8,6 +8,7 @@
   },
   "author": "Vylpes",
   "license": "MIT",
+  "funding": "https://ko-fi.com/vylpes",
   "dependencies": {
     "discord.js": "^12.3.1"
   },
