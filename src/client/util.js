@@ -50,10 +50,12 @@ class util {
                     // Get the ids of the users that are only permitted to run this command
                     let users = command.users;
 
-                    // If the user isn't in the list, don't run the command
-                    if (!users.includes(message.member.id)) {
-                        message.reply(`You do not have permission to run this command`);
-                        return;
+                    // If the command has any limits, limit the command, otherwise default to anyone
+                    if (users.length > 0) {
+                        if (!users.includes(message.member.id)) {
+                            message.reply(`You do not have permission to run this command`);
+                            return;
+                        }
                     }
 
                     // Run the command and pass the command context with it
