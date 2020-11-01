@@ -117,8 +117,8 @@ Enhancement suggestions are tracked as GitHub issues. After you've determined th
 
 Unsure where to begin contributing to VylBot Core? You can start by looking through these `good first` and `help wanted` issues:
 
-* [Good first issue](https://github.com/GetGravitySoft/VylBot Core/labels/good%20first%20issue) - issues which should only require a few lines of code, and a test or two.
-* [Help wanted](https://github.com/GetGravitySoft/VylBot Core/labels/help%20wanted) - issues which should be a bit more involved than `good first` issues.
+* [Good first issue](https://github.com/vylpes/vylbot-core/labels/good%20first%20issue) - issues which should only require a few lines of code, and a test or two.
+* [Help wanted](https://github.com/vylpes/vylbot-core/labels/help%20wanted) - issues which should be a bit more involved than `good first` issues.
 
 #### Prerequisites
 
@@ -193,6 +193,8 @@ All JavaScript code is linted with `eslint`.
 * Prefer arrow function parameters to have brackets `()` only when needed
 * Prefer arrow function arrows `=>` to have a space before and after it
 * Prefer `let` and `const` over `var`
+* Prefer template strings over string concatenation
+* Prefer comma at the end of the line
 
 As well as eslint's recommended defaults.
 
@@ -202,12 +204,20 @@ Example
 function ban (member) {
     let reason = "Example reason";
 
+    let args = [
+        "one",
+        "two"
+    ];
+
     member.ban(reason).then(() => {
         // handle then here
     }).catch(err => {
         // handle error here
     });
-}# Contributing to VylBot Core
+}
+```
+
+# Contributing to VylBot Core
 
 First off, thanks for taking the time to contribute!
 
@@ -248,6 +258,8 @@ The rules for the code is based upon [Vylpes' Config Repo](https://github.com/vy
 * **Arrow parameters** should have brackets around them only when needed
 * **Arrow spacing** should have a space around the arrow (' => ')
 * **No var** should be used, instead use either let or const when appropriate
+* **Template Strings** should be used over string concatenation
+* **Comma Style** should have the commas separating items in a list at the end of the line
 
 ## How You Can Contribute
 
@@ -402,6 +414,8 @@ All JavaScript code is linted with `eslint`.
 * Prefer arrow function parameters to have brackets `()` only when needed
 * Prefer arrow function arrows `=>` to have a space before and after it
 * Prefer `let` and `const` over `var`
+* Prefer template strngs over string concatenation
+* Prefer commas separating items in a list to be at the end of the line
 
 As well as eslint's recommended defaults.
 
@@ -410,6 +424,11 @@ Example
 ```js
 function ban (member) {
     let reason = "Example reason";
+
+    let args = [
+        "one",
+        "two"
+    ];
 
     member.ban(reason).then(() => {
         // handle then here
