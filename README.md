@@ -40,6 +40,12 @@ client.start();
 
 See the [docs](https://github.com/Vylpes/vylbot-core/blob/main/docs/index.md) for more information on how to use vylbot-core
 
+## VylBot Essentials
+
+Want basic commands to add to your bot? Checkout [VylBot Essentials](https://github.com/vylpes/vylbot-essentials)!
+
+Latest release: `1.0.0` on `3rd November 2020`
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
