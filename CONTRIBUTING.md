@@ -32,7 +32,7 @@ There are a few conventions that have developed over time for this project. When
 
 We won't accept pull requests unless these checks pass. If yours fail, simply fix what the bot says until it passes and then get a repo member to review your code.
 
-The rules for the code is based upon [Vylpes' Config Repo](https://github.com/vylpes/config)
+The rules for the code is based upon [Gravity Software's Config Repo](https://github.com/GetGravitySoft/Config)
 
 * Variable names should use **Camel Case**
 * Functions should put **braces on the same line**
@@ -119,8 +119,8 @@ Enhancement suggestions are tracked as GitHub issues. After you've determined th
 
 Unsure where to begin contributing to VylBot Core? You can start by looking through these `good first` and `help wanted` issues:
 
-* [Good first issue](https://github.com/vylpes/vylbot-core/labels/good%20first%20issue) - issues which should only require a few lines of code, and a test or two.
-* [Help wanted](https://github.com/vylpes/vylbot-core/labels/help%20wanted) - issues which should be a bit more involved than `good first` issues.
+* [Good first issue](https://github.com/getgravitysoft/vylbot-core/labels/good%20first%20issue) - issues which should only require a few lines of code, and a test or two.
+* [Help wanted](https://github.com/getgravitysoft/vylbot-core/labels/help%20wanted) - issues which should be a bit more involved than `good first` issues.
 
 #### Prerequisites
 
@@ -251,7 +251,7 @@ There are a few conventions that have developed over time for this project. When
 
 We won't accept pull requests unless these checks pass. If yours fail, simply fix what the bot says until it passes and then get a repo member to review your code.
 
-The rules for the code is based upon [Vylpes' Config Repo](https://github.com/vylpes/config)
+The rules for the code is based upon [Gravity Software's Config Repo](https://github.com/getgravitysoft/config)
 
 * Variable names should use **Camel Case**
 * Functions should put **braces on the same line**
