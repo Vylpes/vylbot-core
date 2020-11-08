@@ -38,6 +38,9 @@ class util {
                     // Get the roles required for this command to run
                     let requiredRoles = command.roles;
 
+                    // Get the category, if there is no category, set it to a default string
+                    if (!command.category) command.category = "none";
+
                     // Loop through all roles required
                     for (let i = 0; i < requiredRoles.length; i++) {
                         // If the user doesn't have a required role, don't run the command and let the user know
