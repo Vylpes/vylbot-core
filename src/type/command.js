@@ -3,7 +3,7 @@ class command {
         this.run = run;
 
         this._roles = [];
-        this._requiredConfigs = [];
+        this._configs = [];
         this._users = [];
     }
 
@@ -44,12 +44,22 @@ class command {
     }
 
     // Config
+    get configs() {
+        return this._configs;
+    }
+
+    set configs(conf) {
+        this._configs.push(conf);
+    }
+
     get requiredConfigs() {
-        return this._requiredConfigs;
+        console.warn("'requiredConfigs' is deprecated and will be removed in a future version. Please use 'configs' instead.");
+        return this._configs;
     }
 
     set requiredConfigs(conf) {
-        this._requiredConfigs.push(conf);
+        console.warn("'requiredConfigs' is deprecated and will be removed in a future version. Please use 'configs' instead.");
+        this._configs.push(conf);
     }
 
     // Users

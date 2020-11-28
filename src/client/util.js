@@ -26,13 +26,13 @@ class util {
                     let command = new commandFile();
 
                     // Get the list of required configurations the command needs
-                    let requiredConfigs = command.requiredConfigs;
+                    let commandConfigs = command.configs;
 
                     // Loop through all the required configs of the command
-                    for (let i = 0; i < requiredConfigs.length; i++) {
+                    for (let i = 0; i < commandConfigs.length; i++) {
                         // If the command doesn't have the configs in the config string, throw an error
-                        if (!this._client.config[name]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
-                        if (!this._client.config[name][requiredConfigs[i]]) throw `${commandFile.name} requires ${requiredConfigs[i]} in it's configuration`;
+                        if (!this._client.config[name]) throw `${commandFile.name} requires ${commandConfigs[i]} in it's configuration`;
+                        if (!this._client.config[name][commandConfigs[i]]) throw `${commandFile.name} requires ${commandConfigs[i]} in it's configuration`;
                     }
 
                     // Get the roles required for this command to run
