@@ -46,9 +46,14 @@ class client extends Client {
         if (typeof config.token != "string") throw "Token is not a string";
         if (typeof config.prefix != "string") throw "Prefix is not a string";
 
+        // Make sure the command config string is set and the file exists
+        if (typeof config.cmdconfig != "string") throw "Cmdconfig is not a string";
+        if (!existsSync(config.cmdconfig)) throw `The file '${config.cmdconfig}' does not exist`;
+
 	// Make sure commands and events are arrays, each item inside will be validated later
         if (typeof config.commands != "object") throw "Commands is not a string";
         if (typeof config.events != "object") throw "Events is not a string";
+
 
         this._config = config;
     }

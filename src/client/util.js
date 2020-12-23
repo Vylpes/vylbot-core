@@ -1,6 +1,5 @@
 // Required Components
 const { stat, readdirSync } = require('fs');
-const { config } = require('process');
 
 // Util Class
 class util {
@@ -25,14 +24,19 @@ class util {
                     let commandFile = require(`${process.cwd()}/${folder}/${name}.js`);
                     let command = new commandFile();
 
+                    // Require the command config file and get the config for the current command
+                    let configString = this._client.config.cmdconfig
+                    let configFile = require(`${process.cwd()}/${configString}`);
+                    let config = configFile[name];
+
                     // Get the list of required configurations the command needs
                     let commandConfigs = command.configs;
 
                     // Loop through all the required configs of the command
                     for (let i = 0; i < commandConfigs.length; i++) {
                         // If the command doesn't have the configs in the config string, throw an error
-                        if (!this._client.config[name]) throw `${commandFile.name} requires ${commandConfigs[i]} in it's configuration`;
-                        if (!this._client.config[name][commandConfigs[i]]) throw `${commandFile.name} requires ${commandConfigs[i]} in it's configuration`;
+                        if (!config) throw `${commandFile.name} requires ${commandConfigs[i]} in it's configuration`;
+                        if (!config[commandConfigs[i]]) throw `${commandFile.name} requires ${commandConfigs[i]} in it's configuration`;
                     }
 
                     // Get the roles required for this command to run

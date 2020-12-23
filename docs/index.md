@@ -8,6 +8,7 @@ Welcome to the VylBot Core documentation. In this file we will explain how to se
 2. Configuring the client
 3. Creating a command
 4. Handling an event
+5. Configuring command configs
 
 ## 1. Initial Setup
 
@@ -45,11 +46,13 @@ An example configuration:
     ],
     "events": [
         "events"
-    ]
+    ],
+    "cmdconfig": "cmdconfig.json"
 }
 ```
 
-Make sure the folders that you set for `commands` and `events` exist and are at your project's current working directory.
+- Make sure the folders that you set for `commands` and `events` exist and are at your project's current working directory.
+- Make sure the file set in `cmdconfig` exists and contains json data for the commands (see below)
 
 ## 3. Creating a command
 
@@ -64,7 +67,7 @@ class test extends command {
         super("test");
         super.description = "Test description";
         super.category = "general";
-        super.requiredConfigs = "link";
+        super.configs = "link";
         super.roles = "Moderator";
         super.roles = "Admin";
         super.users = "<ID-HERE>";
@@ -89,9 +92,9 @@ module.exports = test;
 
 > **Note:** You can set more than one user to be required by settubg `super.users` again.
 
-6. If you want the command to require a variable in the config, set the name in `super.requiredConfigs`
+6. If you want the command to require a variable in the config, set the name in `super.configs`
 
-> **Note:** You can set more than one role to be required by setting `super.requiredConfigs` again.
+> **Note:** You can set more than one role to be required by setting `super.configs` again.
 
 7. Create a method using the name you set in `super(run)`, with the `context` as its parameter.
 
@@ -107,7 +110,7 @@ The `context` parameter will be a JSON object of:
 }
 ```
 
-The command's config will be stored under the command's name, for example, if a command called `test` has set `super.requiredConfigs = "link"`, it will be set in the config as `test.link`.
+The command's config will be stored under the command's name, for example, if a command called `test` has set `super.configs = "link"`, it will be set in the config as `test.link`.
 
 ## 4. Handling an event
 
@@ -135,3 +138,47 @@ module.exports = message;
 3. Create a method using the name you set in `super(run)`, with the parameters being as per your event's paramaters in the discord.js documentation.
 
 > **Note:** The name of the event file will determine what event it will be triggered on. For example, if you want to have an event trigger everytime a message is sent, put into your event folder a file called `message.js` and follow the steps above.
+
+## 5. Configuring command configs
+
+The command config json (specified in the main config's `cmdconfig` variable) contiains all the configuration set for the commands.
+
+The syntax is as follows:
+
+```json
+{
+    "Command": {
+        "Variable": "Value"
+    }
+}
+```
+
+- **Command:** The name of the command, such as `ban.js` command would be `ban`.
+- **Variable:** The variable name set in the command, this would be one for every `super.configs` in the command's constructor.
+- **Value:** The value for the command.
+
+An example would be:
+
+```js
+// ban.js
+
+class ban extends Command {
+    constructor() {
+        super("ban");
+        super.configs = "modrole";
+        // ...
+    }
+
+    // ...
+}
+```
+
+Would have in the command config file:
+
+```json
+{
+    "ban": {
+        "modrole": "Moderators"
+    }
+}
+```
