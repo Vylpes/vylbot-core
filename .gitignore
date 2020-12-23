@@ -111,3 +111,5 @@ config.json
 
 # Linux Environment Files
 *.swp
+
+cmdconfig.json
