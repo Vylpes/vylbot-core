@@ -3,21 +3,33 @@ class event {
     // Emit when a message is sent
     // Used to check for commands
     message(message) {
-	// Make sure command is sent within a guild and not by a bot, otherwise return and ignore
-        if (!message.guild) return;
-        if (message.author.bot) return;
+        // Make sure command is sent within a guild and not by a bot, otherwise return and ignore
+        if (!message) return false;
+        if (!message.guild) return false;
+        if (message.author.bot) return false;
 
-	// Get the prefix from the config
-        let prefix = this.config.prefix;
+        // Get the prefix from the config
+        const prefix = this.config.prefix;
 
         // If the message starts with the prefix, then treat it as a command
         if (message.content.substring(0, prefix.length).toLowerCase() == prefix.toLowerCase()) {
             // Get the arguments in the message, after the first space (after the command name)
-            let args = message.content.substring(prefix.length).split(" ");
-            let name = args.shift();
+            const args = message.content.substring(prefix.length).split(" ");
+            const name = args.shift();
 
             // Load the command from the util class
-            this.util.loadCommand(name, args, message);
+            const res = this.util.loadCommand(name, args, message);
+
+            if (!res.valid) {
+                if (res.message != 'File does not exist') throw res.message;
+            }
+
+            return {
+                "prefix": prefix,
+                "name": name,
+                "args": args,
+                "message": message
+            };
         }
     }
 

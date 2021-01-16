@@ -1,0 +1,14 @@
+{
+    "token": {
+        "type": "string"
+    },
+    "prefix": {
+        "type": "string"
+    },
+    "commands": {
+        "type": "string"
+    },
+    "events": {
+        "type": "string"
+    }
+}
