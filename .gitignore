@@ -106,8 +106,11 @@ dist
 # VylBot-Core Testing Files
 commands/
 events/
-bot.js
-config.json
+/bot.js
+/config.json
+
+!tests/commands/
+!tests/events/
 
 # Linux Environment Files
 *.swp

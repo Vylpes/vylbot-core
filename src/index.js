@@ -1,5 +1,3 @@
-const discord = require('discord.js');
-
 module.exports = {
     client: require('./client/client'),
     command: require('./type/command'),

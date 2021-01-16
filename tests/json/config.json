@@ -1,0 +1,6 @@
+{
+    "token": "TOKEN",
+    "prefix": "d!",
+    "commands": "tests/commands",
+    "events": "tests/events"
+}

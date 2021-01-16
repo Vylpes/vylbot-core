@@ -1,32 +1,40 @@
 // Required Components
 const { Client } = require('discord.js');
-const { existsSync } = require('fs');
+const { validateConfig } = require('./validation');
 
 const events = require('./events');
 const util = require('./util');
 
+// Required JSON
+const expectedConfig = require('../json/expectedConfig.json');
+
 // Client Class
 class client extends Client {
-    constructor(config) {
-	// Call Discord.JS Client
+    constructor(config, commandConfig) {
+    // Call Discord.JS Client
         super();
 
-	// Set the client's configuration, initialise events, initialise utilities
+    // Set the client's configuration, initialise events, initialise utilities
         this.config = config;
+        this.commandConfig = commandConfig;
         this.events = new events();
         this.util = new util(this);
     }
 
     // Method to start the bot
     start() {
-	// Events to handle commands
+        // Check the bot is ready to start
+        if (!this._config) throw "Config has not been set";
+        if (!this._commandConfig) throw "Command Config has not been set";
+
+        // Events to handle commands
         super.on("message", this.events.message);
         super.on("ready", this.events.ready);
-	
-	// Login to discord using Discord.JS
+
+            // Login to discord using Discord.JS
         super.login(this._config.token);
 
-	// Load events
+        // Load events
         this.util.loadEvents();
     }
 
@@ -37,25 +45,19 @@ class client extends Client {
 
     set config(config) {
         // Validate the config
-	
-	// Only allow config to be set once and only as a JSON object
-        if (this._config) throw "Config has already been set";
-        if (typeof config != "object") throw "Config is not a JSON object";
-
-	// Make sure the token and prefix are strings
-        if (typeof config.token != "string") throw "Token is not a string";
-        if (typeof config.prefix != "string") throw "Prefix is not a string";
-
-        // Make sure the command config string is set and the file exists
-        if (typeof config.cmdconfig != "string") throw "Cmdconfig is not a string";
-        if (!existsSync(config.cmdconfig)) throw `The file '${config.cmdconfig}' does not exist`;
-
-	// Make sure commands and events are arrays, each item inside will be validated later
-        if (typeof config.commands != "object") throw "Commands is not a string";
-        if (typeof config.events != "object") throw "Events is not a string";
-
+        const val = validateConfig(config, expectedConfig);
+        if (!val.valid) throw val.message;
 
         this._config = config;
+    }
+
+    // Command Config
+    get commandConfig() {
+        return this._commandConfig;
+    }
+
+    set commandConfig(config) {
+        this._commandConfig = config;
     }
 }
 
