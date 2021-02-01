@@ -4,7 +4,7 @@ Discord bot client based upon Discord.js
 
 ## Installation
 
-Download the latest version from the [releases page](https://github.com/GetGravitySoft/vylbot-core/releases).
+Download the latest version from the [releases page](https://gitlab.vylpes.com/Vylpes/vylbot-core/-/releases).
 
 Copy the config template file and fill in the strings.
 
@@ -38,13 +38,7 @@ const client = new vylbot.client(config);
 client.start();
 ```
 
-See the [docs](https://github.com/GetGravitySoft/vylbot-core/blob/main/docs/index.md) for more information on how to use vylbot-core
-
-## VylBot Essentials
-
-Want basic commands to add to your bot? Checkout [VylBot Essentials](https://github.com/GetGravitySoft/vylbot-essentials)!
-
-Latest release: `1.0.0` on `3rd November 2020`
+See the [docs](https://gitlab.vylpes.com/Vylpes/vylbot-core/-/wikis/home) for more information on how to use vylbot-core
 
 ## Contributing
 
