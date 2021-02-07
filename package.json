@@ -22,8 +22,8 @@
     "bot",
     "client"
   ],
-"repository": "github:vylpes/vylbot-core",
-"devDependencies": {
+  "repository": "github:vylpes/vylbot-core",
+  "devDependencies": {
     "eslint": "^7.17.0"
-}
+  }
 }

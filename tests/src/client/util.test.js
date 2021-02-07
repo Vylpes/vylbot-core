@@ -1,5 +1,6 @@
 const util = require('../../../src/client/util');
 const { readFileSync, read } = require('fs');
+const { test, expect } = require('@jest/globals');
 
 // Mocks
 jest.mock('discord.js');
@@ -73,5 +74,13 @@ describe('util.loadCommand', () => {
 
         expect(res.valid).toBe(false);
         expect(res.message).toBe("test requires tester in it's configuration");
+    });
+
+    test('Should throw error if command folder does not exist', () => {
+        client.config.commands = "falsefile";
+        let res = instance.loadCommand('testing', 'param1', message);
+
+        expect(res.valid).toBe(false);
+        expect(res.message).toBe('Command folder does not exist');
     });
 });
