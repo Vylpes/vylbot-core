@@ -83,4 +83,18 @@ describe('util.loadCommand', () => {
         expect(res.valid).toBe(false);
         expect(res.message).toBe('Command folder does not exist');
     });
+
+    test('Should throw error if user does not have required role', () => {
+        let res = instance.loadCommand('testingRoles', 'param1', message);
+
+        expect(res.valid).toBe(false);
+        expect(res.message).toBe('You require the `Regular` role to run this command');
+    });
+
+    test('Should throw error if user is not in users array', () => {
+        let res = instance.loadCommand('testingUsers', 'param1', message);
+
+        expect(res.valid).toBe(false);
+        expect(res.message).toBe('You do not have permission to run this command');
+    })
 });

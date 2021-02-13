@@ -3,5 +3,12 @@
     "author": {
         "bot": false
     },
-    "content": "d!testing param1"
+    "content": "d!testing param1",
+    "member": {
+        "roles": {
+            "cache": [
+                "NonRegular"
+            ]
+        }
+    }
 }
