@@ -31,6 +31,8 @@ class event {
                 "message": message
             };
         }
+
+        return false;
     }
 
     // Emit when bot is logged in and ready to use

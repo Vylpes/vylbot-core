@@ -1,5 +1,6 @@
 const events = require('../../../src/client/events');
 const { readFileSync } = require('fs');
+const { expect } = require('@jest/globals');
 
 // Mocks
 jest.mock('discord.js');
@@ -85,5 +86,44 @@ describe('events.message', () => {
         expect(() => {
             instance.message(message)
         }).not.toThrow();
+    });
+
+    test('Should return if message doesnt have prefix', () => {
+        message.content = "Just a normal message";
+        const res = instance.message(message);
+
+        expect(res).toBe(false);
+    });
+});
+
+describe('events.ready', () => {
+    let instance;
+    let message;
+    let config;
+
+    beforeEach(() => {
+        instance = new events();
+        message = JSON.parse(readFileSync('tests/json/message.json'));
+        config = JSON.parse(readFileSync('tests/json/config.json'));
+
+        instance.config = config;
+
+        instance.util = jest.fn();
+        instance.util.loadCommand = jest.fn(() => {
+            return {
+                "valid": true,
+                "message": "No message was set"
+            }
+        });
+
+        console = jest.fn();
+        console.log = jest.fn();
+    });
+
+    test('Should log when ready', () => {
+        const res = instance.ready();
+
+        expect(console.log).toHaveBeenCalledTimes(1);
+        expect(console.log).toHaveBeenCalledWith("Ready");
     });
 });
