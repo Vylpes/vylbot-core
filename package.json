@@ -12,8 +12,7 @@
   "license": "MIT",
   "funding": "https://ko-fi.com/gravitysoftware",
   "dependencies": {
-    "discord.js": "^12.3.1",
-    "jest": "^26.6.3"
+    "discord.js": "^12.3.1"
   },
   "bugs": "https://github.com/vylpes/vylbot-core/issues",
   "homepage": "https://github.com/vylpes/vylbot-core",
@@ -24,6 +23,7 @@
   ],
   "repository": "github:vylpes/vylbot-core",
   "devDependencies": {
-    "eslint": "^7.17.0"
+    "eslint": "^7.17.0",
+    "jest": "^27.0.6"
   }
 }
