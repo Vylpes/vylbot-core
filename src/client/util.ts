@@ -4,6 +4,7 @@ import { readdirSync, existsSync } from "fs";
 import { IBaseResponse } from "../contracts/IBaseResponse";
 import { Command } from "../type/command";
 import { Event } from "../type/event";
+import { ICommandContext } from "../contracts/ICommandContext";
 
 export interface IUtilResponse extends IBaseResponse {
     context?: {
@@ -42,9 +43,15 @@ export class Util {
                         };
                     }
                 }
+				
+				const context: ICommandContext = {
+					name: name,
+					args: args,
+					message: message,
+				}
     
                 // Run the command and pass the command context with it
-                command.execute(name, args, message);
+                command.execute(context);
 
                 return {
                     valid: true,

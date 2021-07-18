@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+import { ICommandContext } from "../contracts/ICommandContext";
 
 export class Command {
     public _roles: string[];
@@ -9,7 +10,7 @@ export class Command {
         this._roles = [];
     }
 
-    public execute(name: string, args: string[], message: Message) {
+    public execute(context: ICommandContext) {
 
     }
 }
