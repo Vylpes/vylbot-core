@@ -77,29 +77,32 @@ export class Util {
 
     // Load the events
     loadEvents(client: Client): IUtilResponse {
-        // Get the current folder to check
         const folder = process.env.FOLDERS_EVENTS;
-
-        // If the folder exists
+		
         if (existsSync(`${process.cwd()}/${folder}/`)) {
-            // Get the files inside of this folder
             const eventFiles = readdirSync(`${process.cwd()}/${folder}/`);
-
-            // Loop through all the files in the folder
+			
             for (let i = 0; i < eventFiles.length; i++) {
-                // Ignore non-javascript files
                 if (eventFiles[i].includes('.ts')) {
-                    // Get the event name, by taking the command file and removing the ".ts" from the end
-                    const eventName = eventFiles[i].split('.')[0];
-
-                    // Get the file of the event
+					const eventName = eventFiles[i].split('.')[0];
+					
                     const file = require(`${process.cwd()}/${folder}/${eventName}.ts`);
-
-                    // Initialise the event class
-                    const event = new file() as Event;
-
-                    // Set the client to emit to this event
-                    client.on(eventName, event.execute);
+					
+                    const event = new file[eventName]() as Event;
+					
+					// Load events
+					client.on('channelCreate', event.channelCreate);
+					client.on('channelDelete', event.channelDelete);
+					client.on('channelUpdate', event.channelUpdate);
+					client.on('guildBanAdd', event.guildBanAdd);
+					client.on('guildBanRemove', event.guildBanRemove);
+					client.on('guildCreate', event.guildCreate);
+					client.on('guildMemberAdd', event.guildMemberAdd);
+					client.on('guildMemberRemove', event.guildMemberRemove);
+					client.on('guildMemberUpdate', event.guildMemberUpdate);
+					client.on('message', event.message);
+					client.on('messageDelete', event.messageDelete);
+					client.on('messageUpdate', event.messageUpdate);
                 }
             }
 
