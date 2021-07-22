@@ -68,7 +68,7 @@ export class Events {
         }
 
         return {
-            valid: true,
+            valid: false,
             message: "Message was not a command, ignoring.",
         }
     }
