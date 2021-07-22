@@ -19,7 +19,7 @@ export class Util {
     public loadCommand(name: string, args: string[], message: Message): IUtilResponse {
         if (!message.member) return {
             valid: false,
-            message: "Member is not part of member",
+            message: "Member is not part of message",
         };
 
         const folder = process.env.FOLDERS_COMMANDS;
