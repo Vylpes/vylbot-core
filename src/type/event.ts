@@ -48,4 +48,8 @@ export class Event {
 	public messageUpdate(oldMessage: Message | PartialMessage, newMessage: Message | PartialMessage) {
 		
 	}
+
+	public ready() {
+
+	}
 }

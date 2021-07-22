@@ -96,6 +96,7 @@ The following events are supported:
 * message(message: Message)
 * messageDelete(message: Message | PartialMessage)
 * messageUpdate(oldMessage: Message | PartialMessage, newMessage: Message | PartialMessage)
+* ready()
 
 All parameters are supplied from discord.js
 

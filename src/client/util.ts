@@ -103,6 +103,7 @@ export class Util {
 					client.on('message', event.message);
 					client.on('messageDelete', event.messageDelete);
 					client.on('messageUpdate', event.messageUpdate);
+					client.on('ready', event.ready);
                 }
             }
 
