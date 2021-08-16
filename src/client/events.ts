@@ -21,11 +21,6 @@ export class Events {
     // Emit when a message is sent
     // Used to check for commands
     public onMessage(message: Message): IEventResponse {
-        if (!message) return {
-            valid: false,
-            message: "Message was not supplied.",
-        };
-
         if (!message.guild) return {
             valid: false,
             message: "Message was not sent in a guild, ignoring.",
