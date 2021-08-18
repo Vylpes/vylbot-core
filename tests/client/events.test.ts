@@ -7,6 +7,10 @@ import { Util } from "../../src/client/util";
 jest.mock("dotenv");
 jest.mock("../../src/client/util");
 
+beforeEach(() => {
+    Util.prototype.loadCommand = jest.fn();
+});
+
 test('OnMessage_GivenMessageIsValid_ExpectMessageSent', () => {
     process.env = {
         BOT_TOKEN: 'TOKEN',
@@ -197,4 +201,190 @@ test('OnMessage_GivenAuthorIsBot_ExpectFailedResult', () => {
     expect(result.message).toBe("Message was sent by a bot, ignoring.");
 
     client.destroy();
+});
+
+test('OnMessage_GivenMessageContentsWasNotACommand_ExpectFailedResult', () => {
+    process.env = {
+        BOT_TOKEN: 'TOKEN',
+        BOT_PREFIX: '!',
+        FOLDERS_COMMANDS: 'commands',
+        FOLDERS_EVENTS: 'events',
+    }
+
+    Util.prototype.loadCommand = jest.fn().mockImplementation((name: string, args: string[], message: Message) => {
+        return {
+            valid: true
+        }
+    });
+
+    let client = new Client();
+    let guild = new Guild(client, {
+        id: SnowflakeUtil.generate(),
+    });
+    let user = new User(client, {
+        id: SnowflakeUtil.generate(),
+    });
+    let member = new GuildMember(
+        client,
+        {
+            id: SnowflakeUtil.generate(),
+            user: {
+                id: user.id
+            }
+        },
+        guild
+    );
+    let role = new Role(
+        client,
+        {
+            id: SnowflakeUtil.generate()
+        },
+        guild
+    );
+    let message = new Message(
+        client,
+        {
+            content: "This is a standard message without a prefix",
+            author: {
+                username: "test-user",
+                discriminator: 1234,
+            },
+            id: "test",
+        },
+        new TextChannel(guild, {
+        client: client,
+        guild: guild,
+        id: "channel-id",
+      })
+    );
+
+    const events = new Events();
+
+    const result = events.onMessage(message);
+
+    expect(result.valid).toBeFalsy();
+    expect(result.message).toBe("Message was not a command, ignoring.");
+
+    client.destroy();
+});
+
+test('OnMessage_GivenMessageHadNoCommandName_ExpectFailedResult', () => {
+    process.env = {
+        BOT_TOKEN: 'TOKEN',
+        BOT_PREFIX: '!',
+        FOLDERS_COMMANDS: 'commands',
+        FOLDERS_EVENTS: 'events',
+    }
+
+    Util.prototype.loadCommand = jest.fn().mockImplementation((name: string, args: string[], message: Message) => {
+        return { 
+            valid: true
+        }
+    });
+
+    let discordClient = new Client();
+    let guild = new Guild(discordClient, {
+      id: SnowflakeUtil.generate(),
+    });
+    let user = new User(discordClient, {
+      id: SnowflakeUtil.generate(),
+    });
+    let member = new GuildMember(
+      discordClient,
+      { id: SnowflakeUtil.generate(), user: { id: user.id } },
+      guild
+    );
+    let role = new Role(
+      discordClient,
+      { id: SnowflakeUtil.generate() },
+      guild
+    );
+    let message = new Message(
+      discordClient,
+      {
+        content: "!",
+        author: { username: "test-user", discriminator: 1234 },
+        id: "test",
+      },
+      new TextChannel(guild, {
+        client: discordClient,
+        guild: guild,
+        id: "channel-id",
+      })
+    );
+
+    const events = new Events();
+
+    const result = events.onMessage(message);
+
+    expect(result.valid).toBeFalsy();
+    expect(result.message).toBe("Command name was not found");
+
+    discordClient.destroy();
+});
+
+test('OnMessage_GivenCommandFailedToExecute_ExpectFailedResult', () => {
+    process.env = {
+        BOT_TOKEN: 'TOKEN',
+        BOT_PREFIX: '!',
+        FOLDERS_COMMANDS: 'commands',
+        FOLDERS_EVENTS: 'events',
+    }
+
+    Util.prototype.loadCommand = jest.fn().mockImplementation((name: string, args: string[], message: Message) => {
+        return { 
+            valid: false,
+            message: "Command failed",
+        }
+    });
+
+    let discordClient = new Client();
+    let guild = new Guild(discordClient, {
+      id: SnowflakeUtil.generate(),
+    });
+    let user = new User(discordClient, {
+      id: SnowflakeUtil.generate(),
+    });
+    let member = new GuildMember(
+      discordClient,
+      { id: SnowflakeUtil.generate(), user: { id: user.id } },
+      guild
+    );
+    let role = new Role(
+      discordClient,
+      { id: SnowflakeUtil.generate() },
+      guild
+    );
+    let message = new Message(
+      discordClient,
+      {
+        content: "!test first",
+        author: { username: "test-user", discriminator: 1234 },
+        id: "test",
+      },
+      new TextChannel(guild, {
+        client: discordClient,
+        guild: guild,
+        id: "channel-id",
+      })
+    );
+
+    const events = new Events();
+
+    const result = events.onMessage(message);
+
+    expect(result.valid).toBeFalsy();
+    expect(result.message).toBe("Command failed");
+
+    discordClient.destroy();
+});
+
+test('OnReady_ExpectConsoleLog', () => {
+    console.log = jest.fn();
+
+    const events = new Events();
+
+    events.onReady();
+
+    expect(console.log).toBeCalledWith("Ready");
 });

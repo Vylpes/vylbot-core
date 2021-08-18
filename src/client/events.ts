@@ -45,7 +45,7 @@ export class Events {
             const res = this._util.loadCommand(name, args, message);
 
             if (!res.valid) {
-                if (res.message != 'File does not exist') return {
+                return {
                     valid: false,
                     message: res.message,
                 };
