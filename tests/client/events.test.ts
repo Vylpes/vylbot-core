@@ -1,7 +1,6 @@
 import { Events } from "../../src/client/events";
 
-import { Message, Client, User, GuildMember, TextChannel, Guild, SnowflakeUtil, Role, DMChannel } from "discord.js";
-import * as dotenv from "dotenv";
+import { Message, Client, TextChannel, Guild, SnowflakeUtil, DMChannel } from "discord.js";
 import { Util } from "../../src/client/util";
 
 jest.mock("dotenv");
@@ -29,19 +28,6 @@ test('OnMessage_GivenMessageIsValid_ExpectMessageSent', () => {
     let guild = new Guild(discordClient, {
       id: SnowflakeUtil.generate(),
     });
-    let user = new User(discordClient, {
-      id: SnowflakeUtil.generate(),
-    });
-    let member = new GuildMember(
-      discordClient,
-      { id: SnowflakeUtil.generate(), user: { id: user.id } },
-      guild
-    );
-    let role = new Role(
-      discordClient,
-      { id: SnowflakeUtil.generate() },
-      guild
-    );
     let message = new Message(
       discordClient,
       {
@@ -89,26 +75,6 @@ test('OnMessage_GivenGuildIsNull_ExpectFailedResult', () => {
     let guild = new Guild(client, {
         id: SnowflakeUtil.generate(),
     });
-    let user = new User(client, {
-        id: SnowflakeUtil.generate(),
-    });
-    let member = new GuildMember(
-        client,
-        {
-            id: SnowflakeUtil.generate(),
-            user: {
-                id: user.id
-            }
-        },
-        guild
-    );
-    let role = new Role(
-        client,
-        {
-            id: SnowflakeUtil.generate()
-        },
-        guild
-    );
     let message = new Message(
         client,
         {
@@ -155,26 +121,6 @@ test('OnMessage_GivenAuthorIsBot_ExpectFailedResult', () => {
     let guild = new Guild(client, {
         id: SnowflakeUtil.generate(),
     });
-    let user = new User(client, {
-        id: SnowflakeUtil.generate(),
-    });
-    let member = new GuildMember(
-        client,
-        {
-            id: SnowflakeUtil.generate(),
-            user: {
-                id: user.id
-            }
-        },
-        guild
-    );
-    let role = new Role(
-        client,
-        {
-            id: SnowflakeUtil.generate()
-        },
-        guild
-    );
     let message = new Message(
         client,
         {
@@ -221,26 +167,6 @@ test('OnMessage_GivenMessageContentsWasNotACommand_ExpectFailedResult', () => {
     let guild = new Guild(client, {
         id: SnowflakeUtil.generate(),
     });
-    let user = new User(client, {
-        id: SnowflakeUtil.generate(),
-    });
-    let member = new GuildMember(
-        client,
-        {
-            id: SnowflakeUtil.generate(),
-            user: {
-                id: user.id
-            }
-        },
-        guild
-    );
-    let role = new Role(
-        client,
-        {
-            id: SnowflakeUtil.generate()
-        },
-        guild
-    );
     let message = new Message(
         client,
         {
@@ -286,19 +212,6 @@ test('OnMessage_GivenMessageHadNoCommandName_ExpectFailedResult', () => {
     let guild = new Guild(discordClient, {
       id: SnowflakeUtil.generate(),
     });
-    let user = new User(discordClient, {
-      id: SnowflakeUtil.generate(),
-    });
-    let member = new GuildMember(
-      discordClient,
-      { id: SnowflakeUtil.generate(), user: { id: user.id } },
-      guild
-    );
-    let role = new Role(
-      discordClient,
-      { id: SnowflakeUtil.generate() },
-      guild
-    );
     let message = new Message(
       discordClient,
       {
@@ -342,19 +255,6 @@ test('OnMessage_GivenCommandFailedToExecute_ExpectFailedResult', () => {
     let guild = new Guild(discordClient, {
       id: SnowflakeUtil.generate(),
     });
-    let user = new User(discordClient, {
-      id: SnowflakeUtil.generate(),
-    });
-    let member = new GuildMember(
-      discordClient,
-      { id: SnowflakeUtil.generate(), user: { id: user.id } },
-      guild
-    );
-    let role = new Role(
-      discordClient,
-      { id: SnowflakeUtil.generate() },
-      guild
-    );
     let message = new Message(
       discordClient,
       {
