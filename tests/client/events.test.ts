@@ -3,7 +3,6 @@ import { Events } from "../../src/client/events";
 import { Message, Client, TextChannel, Guild, SnowflakeUtil, DMChannel } from "discord.js";
 import { Util } from "../../src/client/util";
 
-jest.mock("dotenv");
 jest.mock("../../src/client/util");
 
 beforeEach(() => {
