@@ -1,44 +1,14 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6
-    },
-    "extends": [
-        "eslint:recommended"
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
     ],
-    "rules": {
-        "camelcase": "error",
-        "brace-style": [
-            "error",
-            "1tbs"
-        ],
-        "comma-dangle": [
-            "error",
-            "never"
-        ],
-        "comma-spacing": [
-            "error",
-            {
-                "before": false,
-                "after": true
-            }
-        ],
-        "comma-style": [
-            "error",
-            "last"
-        ],
-        "arrow-body-style": [
-            "error",
-            "as-needed"
-        ],
-        "arrow-parens": [
-            "error",
-            "as-needed"
-        ],
-        "arrow-spacing": "error",
-        "no-var": "error",
-        "prefer-template": "error",
-        "prefer-const": "error"
-    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
     "globals": {
         "exports": "writable",
         "module": "writable",
@@ -46,4 +16,4 @@
         "process": "writable",
         "console": "writable"
     }
-}
+  }
