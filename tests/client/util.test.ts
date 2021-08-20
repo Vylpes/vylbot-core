@@ -1,6 +1,6 @@
 import { Util } from "../../src/client/util";
 
-import { Client, Guild, Message, SnowflakeUtil, TextChannel, User } from "discord.js";
+import { Client, Guild, Message, Role, SnowflakeUtil, TextChannel, User } from "discord.js";
 import fs from "fs";
 
 jest.mock("fs");
@@ -235,4 +235,62 @@ test('LoadCommand_GivenFileDoesNotExist_ExpectFailedResult', () => {
   expect(result.message).toBe("File does not exist");
 
   client.destroy();
+});
+
+test('LoadCommand_GivenUserHasRole_ExpectSuccessfulResult', () => {
+  process.env = {
+    BOT_TOKEN: 'TOKEN',
+    BOT_PREFIX: '!',
+    FOLDERS_COMMANDS: 'commands',
+    FOLDERS_EVENTS: 'events',
+  }
+  
+  process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
+  fs.existsSync = jest.fn().mockReturnValue(true);
+
+  let message = {
+    member: {
+      roles: {
+        cache: {
+          find: jest.fn().mockReturnValue(true),
+        }
+      },
+    }
+  } as unknown as Message;
+
+  const util = new Util();
+
+  const result = util.loadCommand("roles", [ "first" ], message);
+
+  expect(result.valid).toBeTruthy();
+});
+
+test('LoadCommand_GivenUserDoesNotHaveRole_ExpectFailedResult', () => {
+  process.env = {
+    BOT_TOKEN: 'TOKEN',
+    BOT_PREFIX: '!',
+    FOLDERS_COMMANDS: 'commands',
+    FOLDERS_EVENTS: 'events',
+  }
+  
+  process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
+  fs.existsSync = jest.fn().mockReturnValue(true);
+
+  let message = {
+    member: {
+      roles: {
+        cache: {
+          find: jest.fn().mockReturnValue(false),
+        }
+      },
+    },
+    reply: jest.fn(),
+  } as unknown as Message;
+
+  const util = new Util();
+
+  const result = util.loadCommand("roles", [ "first" ], message);
+
+  expect(result.valid).toBeFalsy();
+  expect(result.message).toBe("You require the `Moderator` role to run this command");
 });
