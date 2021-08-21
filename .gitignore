@@ -108,8 +108,8 @@ commands/
 events/
 /bot.ts
 
-!tests/commands/
-!tests/events/
+!tests/__mocks/commands
+!tests/__mocks/events
 
 # Linux Environment Files
 *.swp

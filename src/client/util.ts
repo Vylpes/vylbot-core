@@ -70,7 +70,7 @@ export class Util {
         } else {
             return {
                 valid: false,
-                message: "Comamnd folder does not exist",
+                message: "Command folder does not exist",
             }
         }
     }
