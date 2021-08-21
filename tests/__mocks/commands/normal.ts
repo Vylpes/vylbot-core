@@ -1,6 +1,6 @@
 import { Command } from "../../../src/type/command";
 
-export class name extends Command {
+export class normal extends Command {
     constructor() {
         super();
         this._category = "General";

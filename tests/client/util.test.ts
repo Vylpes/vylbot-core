@@ -33,7 +33,7 @@ test('LoadCommand_GivenSuccessfulExection_ExpectSuccessfulResult', () => {
 
   const util = new Util();
 
-  const result = util.loadCommand("name", [ "first" ], message);
+  const result = util.loadCommand("normal", [ "first" ], message);
 
   expect(result.valid).toBeTruthy();
 });
@@ -55,7 +55,7 @@ test('LoadCommand_GivenMemberIsNull_ExpectFailedResult', () => {
 
   const util = new Util();
 
-  const result = util.loadCommand("name", [ "first" ], message);
+  const result = util.loadCommand("normal", [ "first" ], message);
 
   expect(result.valid).toBeFalsy();
   expect(result.message).toBe("Member is not part of message");
@@ -85,7 +85,7 @@ test('LoadCommand_GivenFolderDoesNotExist_ExpectFailedResult', () => {
 
   const util = new Util();
 
-  const result = util.loadCommand("name", [ "first" ], message);
+  const result = util.loadCommand("normal", [ "first" ], message);
 
   expect(result.valid).toBeFalsy();
   expect(result.message).toBe("Command folder does not exist");
@@ -116,7 +116,7 @@ test('LoadCommand_GivenFileDoesNotExist_ExpectFailedResult', () => {
 
   const util = new Util();
 
-  const result = util.loadCommand("name", [ "first" ], message);
+  const result = util.loadCommand("normal", [ "first" ], message);
 
   expect(result.valid).toBeFalsy();
   expect(result.message).toBe("File does not exist");
@@ -220,7 +220,7 @@ test('LoadEvents_GivenEventsAreLoaded_ExpectSuccessfulResult', () => {
 
   process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
   fs.existsSync = jest.fn().mockReturnValue(true);
-  fs.readdirSync = jest.fn().mockReturnValue(["name.ts"]);
+  fs.readdirSync = jest.fn().mockReturnValue(["normal.ts"]);
 
   const client = {
     on: jest.fn(),
@@ -246,7 +246,7 @@ test('LoadEvents_GivenNoEventsFound_ExpectSuccessfulResultStill', () => {
 
   process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
   fs.existsSync = jest.fn().mockReturnValue(true);
-  fs.readdirSync = jest.fn().mockReturnValue(["name"]);
+  fs.readdirSync = jest.fn().mockReturnValue(["normal"]);
 
   const client = {
     on: jest.fn(),
@@ -272,7 +272,7 @@ test('LoadEvents_GivenEventFolderDoesNotExist_FailedResult', () => {
 
   process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
   fs.existsSync = jest.fn().mockReturnValue(false);
-  fs.readdirSync = jest.fn().mockReturnValue(["name.ts"]);
+  fs.readdirSync = jest.fn().mockReturnValue(["normal.ts"]);
 
   const client = {
     on: jest.fn(),
