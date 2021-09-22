@@ -22,6 +22,15 @@ export class Util {
             message: "Member is not part of message",
         };
 
+        const disabledCommands = process.env.COMMANDS_DISABLED?.split(',');
+
+        if (disabledCommands?.find(x => x == name)) {
+            return {
+                valid: false,
+                message: "Command is disabled",
+            };
+        }
+
         const folder = process.env.FOLDERS_COMMANDS;
 
         if (existsSync(`${process.cwd()}/${folder}/`)) {
