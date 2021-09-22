@@ -210,6 +210,98 @@ describe('LoadCommand', () => {
   
     expect(result.valid).toBeTruthy();
   });
+
+  test('Given command is set to disabled, Expect command to not fire', () => {
+    process.env = {
+      BOT_TOKEN: 'TOKEN',
+      BOT_PREFIX: '!',
+      FOLDERS_COMMANDS: 'commands',
+      FOLDERS_EVENTS: 'events',
+      COMMANDS_DISABLED: 'normal',
+    }
+    
+    process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
+    fs.existsSync = jest.fn().mockReturnValue(true);
+  
+    const message = {
+      member: {
+        roles: {
+          cache: {
+            find: jest.fn().mockReturnValue(true),
+          }
+        },
+      },
+      reply: jest.fn(),
+    } as unknown as Message;
+  
+    const util = new Util();
+  
+    const result = util.loadCommand("normal", [ "first" ], message);
+  
+    expect(result.valid).toBeFalsy();
+    expect(result.message).toBe("Command is disabled");
+  });
+
+  test('Given a different command is disabled, Expect command to still fire', () => {
+    process.env = {
+      BOT_TOKEN: 'TOKEN',
+      BOT_PREFIX: '!',
+      FOLDERS_COMMANDS: 'commands',
+      FOLDERS_EVENTS: 'events',
+      COMMANDS_DISABLED: 'anything',
+    }
+    
+    process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
+    fs.existsSync = jest.fn().mockReturnValue(true);
+  
+    const message = {
+      member: {
+        roles: {
+          cache: {
+            find: jest.fn().mockReturnValue(true),
+          }
+        },
+      },
+      reply: jest.fn(),
+    } as unknown as Message;
+  
+    const util = new Util();
+  
+    const result = util.loadCommand("normal", [ "first" ], message);
+  
+    expect(result.valid).toBeTruthy();
+  });
+
+  test('Given a different command is disabled with this one, Expect command to not fire', () => {
+    process.env = {
+      BOT_TOKEN: 'TOKEN',
+      BOT_PREFIX: '!',
+      FOLDERS_COMMANDS: 'commands',
+      FOLDERS_EVENTS: 'events',
+      COMMANDS_DISABLED: 'normal,anything,',
+    }
+    
+    process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
+    fs.existsSync = jest.fn().mockReturnValue(true);
+  
+    const message = {
+      member: {
+        roles: {
+          cache: {
+            find: jest.fn().mockReturnValue(true),
+          }
+        },
+      },
+      reply: jest.fn(),
+    } as unknown as Message;
+  
+    const util = new Util();
+  
+    const result = util.loadCommand("normal", [ "first" ], message);
+  
+    expect(result.valid).toBeFalsy();
+    expect(result.message).toBe("Command is disabled");
+  });
 });
 
 describe('LoadEvents', () => {
