@@ -21,7 +21,6 @@ export class CoreClient extends Client {
         if (!process.env.BOT_PREFIX) throw "BOT_PREFIX is not defined in .env";
         if (!process.env.FOLDERS_COMMANDS) throw "FOLDERS_COMMANDS is not defined in .env";
         if (!process.env.FOLDERS_EVENTS) throw "FOLDERS_EVENTS is not defined in .env";
-        if (!process.env.COMMANDS_DISABLED_MESSAGE) throw "COMMANDS_DISABLED_MESSAGE is not defined in .env";
 
         super.on("message", this._events.onMessage);
         super.on("ready", this._events.onReady);

@@ -218,6 +218,7 @@ describe('LoadCommand', () => {
       FOLDERS_COMMANDS: 'commands',
       FOLDERS_EVENTS: 'events',
       COMMANDS_DISABLED: 'normal',
+      COMMANDS_DISABLED_MESSAGE: 'disabled',
     }
     
     process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
@@ -233,6 +234,8 @@ describe('LoadCommand', () => {
       },
       reply: jest.fn(),
     } as unknown as Message;
+
+    const messageReply = jest.spyOn(message, 'reply');
   
     const util = new Util();
   
@@ -240,6 +243,41 @@ describe('LoadCommand', () => {
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("Command is disabled");
+    expect(messageReply).toBeCalledWith("disabled");
+  });
+
+  test('Given command COMMANDS_DISABLED_MESSAGE is empty, Expect default message sent', () => {
+    process.env = {
+      BOT_TOKEN: 'TOKEN',
+      BOT_PREFIX: '!',
+      FOLDERS_COMMANDS: 'commands',
+      FOLDERS_EVENTS: 'events',
+      COMMANDS_DISABLED: 'normal',
+    }
+    
+    process.cwd = jest.fn().mockReturnValue("../../tests/__mocks");
+    fs.existsSync = jest.fn().mockReturnValue(true);
+  
+    const message = {
+      member: {
+        roles: {
+          cache: {
+            find: jest.fn().mockReturnValue(true),
+          }
+        },
+      },
+      reply: jest.fn(),
+    } as unknown as Message;
+
+    const messageReply = jest.spyOn(message, 'reply');
+  
+    const util = new Util();
+  
+    const result = util.loadCommand("normal", [ "first" ], message);
+  
+    expect(result.valid).toBeFalsy();
+    expect(result.message).toBe("Command is disabled");
+    expect(messageReply).toBeCalledWith("This command is disabled.");
   });
 
   test('Given a different command is disabled, Expect command to still fire', () => {
