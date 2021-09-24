@@ -16,6 +16,7 @@ FOLDERS_COMMANDS=commands
 FOLDERS_EVENTS=events
 
 COMMANDS_DISABLED=
+COMMANDS_DISABLED_MESSAGE=This command is disabled.
 ```
 
 * **BOT_TOKEN:** Your bot's token, replace {TOKEN} with your bot token.
@@ -23,6 +24,7 @@ COMMANDS_DISABLED=
 * **FOLDERS_COMMANDS:** The folder which contains your commands.
 * **FOLDERS_EVENTS:** The folder which contains your events.
 * **COMMANDS_DISABLED:** List of command file names that won't run, separated by commas.
+* **COMMANDS_DISABLED_MESSAGE:** The message which is replied to the user who tries to run a disabled command.
 
 Make sure that you **DO NOT** put your .env file into VCS!
 

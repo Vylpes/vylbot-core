@@ -25,6 +25,8 @@ export class Util {
         const disabledCommands = process.env.COMMANDS_DISABLED?.split(',');
 
         if (disabledCommands?.find(x => x == name)) {
+            message.reply(process.env.COMMANDS_DISABLED_MESSAGE || "This command is disabled.");
+
             return {
                 valid: false,
                 message: "Command is disabled",
