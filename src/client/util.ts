@@ -16,7 +16,7 @@ export interface IUtilResponse extends IBaseResponse {
 
 // Util Class
 export class Util {
-    public loadCommand(name: string, args: string[], message: Message): IUtilResponse {
+    public async loadCommand(name: string, args: string[], message: Message): Promise<IUtilResponse> {
         if (!message.member) return {
             valid: false,
             message: "Member is not part of message",
@@ -37,9 +37,9 @@ export class Util {
 
         if (existsSync(`${process.cwd()}/${folder}/`)) {
             if (existsSync(`${process.cwd()}/${folder}/${name}.ts`)) {
-                const commandFile = require(`${process.cwd()}/${folder}/${name}.ts`);
-                const command = new commandFile[name]() as Command;
-    
+                const commandFile = require(`${process.cwd()}/${folder}/${name}.ts`).default;
+                const command = new commandFile() as Command;
+
                 const requiredRoles = command._roles;
 
                 if (!command._category) command._category = "none";
