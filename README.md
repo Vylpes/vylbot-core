@@ -50,7 +50,7 @@ The code below will reply to the user with 'PONG' when they type {PREFIX}ping
 
 import { Command, ICommandContext } from "vylbot-core";
 
-export class Ping extends Command {
+export default class Ping extends Command {
 	constructor() {
 		super();
 		this._roles = [ "Moderator" ];
