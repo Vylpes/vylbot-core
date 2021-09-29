@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 describe('OnMessage', () => {
-    test('Given Message Is Valid Expect Message Sent', () => {
+    test('Given Message Is Valid Expect Message Sent', async () => {
         process.env = {
             BOT_TOKEN: 'TOKEN',
             BOT_PREFIX: '!',
@@ -30,7 +30,7 @@ describe('OnMessage', () => {
     
         const events = new Events();
     
-        const result = events.onMessage(message);
+        const result = await events.onMessage(message);
     
         expect(result.valid).toBeTruthy();
     
@@ -41,7 +41,7 @@ describe('OnMessage', () => {
         expect(result.context?.message).toBe(message);
     });
     
-    test('Given Guild Is Null, Expect Failed Result', () => {
+    test('Given Guild Is Null, Expect Failed Result', async () => {
         process.env = {
             BOT_TOKEN: 'TOKEN',
             BOT_PREFIX: '!',
@@ -61,13 +61,13 @@ describe('OnMessage', () => {
     
         const events = new Events();
     
-        const result = events.onMessage(message);
+        const result = await events.onMessage(message);
     
         expect(result.valid).toBeFalsy();
         expect(result.message).toBe("Message was not sent in a guild, ignoring.");
     });
     
-    test('Given Author Is A Bot, Expect Failed Result', () => {
+    test('Given Author Is A Bot, Expect Failed Result', async () => {
         process.env = {
             BOT_TOKEN: 'TOKEN',
             BOT_PREFIX: '!',
@@ -87,13 +87,13 @@ describe('OnMessage', () => {
     
         const events = new Events();
     
-        const result = events.onMessage(message);
+        const result = await events.onMessage(message);
     
         expect(result.valid).toBeFalsy();
         expect(result.message).toBe("Message was sent by a bot, ignoring.");
     });
     
-    test('Given Message Content Was Not A Command, Expect Failed Result', () => {
+    test('Given Message Content Was Not A Command, Expect Failed Result', async () => {
         process.env = {
             BOT_TOKEN: 'TOKEN',
             BOT_PREFIX: '!',
@@ -113,13 +113,13 @@ describe('OnMessage', () => {
     
         const events = new Events();
     
-        const result = events.onMessage(message);
+        const result = await events.onMessage(message);
     
         expect(result.valid).toBeFalsy();
         expect(result.message).toBe("Message was not a command, ignoring.");
     });
     
-    test('Given Message Had No Command Name, Expect Failed Result', () => {
+    test('Given Message Had No Command Name, Expect Failed Result', async () => {
         process.env = {
             BOT_TOKEN: 'TOKEN',
             BOT_PREFIX: '!',
@@ -139,13 +139,13 @@ describe('OnMessage', () => {
     
         const events = new Events();
     
-        const result = events.onMessage(message);
+        const result = await events.onMessage(message);
     
         expect(result.valid).toBeFalsy();
         expect(result.message).toBe("Command name was not found");
     });
     
-    test('Given Command Failed To Execute, Expect Failed Result', () => {
+    test('Given Command Failed To Execute, Expect Failed Result', async () => {
         process.env = {
             BOT_TOKEN: 'TOKEN',
             BOT_PREFIX: '!',
@@ -165,7 +165,7 @@ describe('OnMessage', () => {
     
         const events = new Events();
     
-        const result = events.onMessage(message);
+        const result = await events.onMessage(message);
     
         expect(result.valid).toBeFalsy();
         expect(result.message).toBe("Command failed");

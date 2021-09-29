@@ -37,9 +37,9 @@ export class Util {
 
         if (existsSync(`${process.cwd()}/${folder}/`)) {
             if (existsSync(`${process.cwd()}/${folder}/${name}.ts`)) {
-                const commandFile = require(`${process.cwd()}/${folder}/${name}.ts`);
-                const command = new commandFile[name]() as Command;
-    
+                const commandFile = require(`${process.cwd()}/${folder}/${name}.ts`).default;
+                const command = new commandFile() as Command;
+
                 const requiredRoles = command._roles;
 
                 if (!command._category) command._category = "none";
