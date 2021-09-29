@@ -20,7 +20,7 @@ export class Events {
 
     // Emit when a message is sent
     // Used to check for commands
-    public async onMessage(message: Message): Promise<IEventResponse> {
+    public onMessage(message: Message): IEventResponse {
         if (!message.guild) return {
             valid: false,
             message: "Message was not sent in a guild, ignoring.",
@@ -42,7 +42,7 @@ export class Events {
                 message: "Command name was not found",
             };
 
-            const res = await this._util.loadCommand(name, args, message);
+            const res = this._util.loadCommand(name, args, message);
 
             if (!res.valid) {
                 return {

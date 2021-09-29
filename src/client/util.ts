@@ -16,7 +16,7 @@ export interface IUtilResponse extends IBaseResponse {
 
 // Util Class
 export class Util {
-    public async loadCommand(name: string, args: string[], message: Message): Promise<IUtilResponse> {
+    public loadCommand(name: string, args: string[], message: Message): IUtilResponse {
         if (!message.member) return {
             valid: false,
             message: "Member is not part of message",

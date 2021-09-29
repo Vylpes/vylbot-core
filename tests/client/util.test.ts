@@ -10,7 +10,7 @@ beforeEach(() => {
 });
 
 describe('LoadCommand', () => {
-  test('Given Successful Exection, Expect Successful Result', async () => {
+  test('Given Successful Exection, Expect Successful Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -34,12 +34,12 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeTruthy();
   });
   
-  test('Given Member Is Null, Expect Failed Result', async () => {
+  test('Given Member Is Null, Expect Failed Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -56,13 +56,13 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("Member is not part of message");
   });
   
-  test('Given Folder Does Not Exist, Expect Failed Result', async () => {
+  test('Given Folder Does Not Exist, Expect Failed Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -86,13 +86,13 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("Command folder does not exist");
   });
   
-  test('Given File Does Not Exist, Expect Failed Result', async () => {
+  test('Given File Does Not Exist, Expect Failed Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -117,13 +117,13 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("File does not exist");
   });
   
-  test('Given User Does Have Role, Expect Successful Result', async () => {
+  test('Given User Does Have Role, Expect Successful Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -147,12 +147,12 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("roles", [ "first" ], message);
+    const result = util.loadCommand("roles", [ "first" ], message);
   
     expect(result.valid).toBeTruthy();
   });
   
-  test('Given User Does Not Have Role, Expect Failed Result', async () => {
+  test('Given User Does Not Have Role, Expect Failed Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -176,13 +176,13 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("roles", [ "first" ], message);
+    const result = util.loadCommand("roles", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("You require the `Moderator` role to run this command");
   });
   
-  test('Given Command Category Is Null, Expect Successful Result', async () => {
+  test('Given Command Category Is Null, Expect Successful Result', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -206,12 +206,12 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("noCategory", [ "first" ], message);
+    const result = util.loadCommand("noCategory", [ "first" ], message);
   
     expect(result.valid).toBeTruthy();
   });
 
-  test('Given command is set to disabled, Expect command to not fire', async () => {
+  test('Given command is set to disabled, Expect command to not fire', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -239,14 +239,14 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("Command is disabled");
     expect(messageReply).toBeCalledWith("disabled");
   });
 
-  test('Given command COMMANDS_DISABLED_MESSAGE is empty, Expect default message sent', async () => {
+  test('Given command COMMANDS_DISABLED_MESSAGE is empty, Expect default message sent', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -273,14 +273,14 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("Command is disabled");
     expect(messageReply).toBeCalledWith("This command is disabled.");
   });
 
-  test('Given a different command is disabled, Expect command to still fire', async () => {
+  test('Given a different command is disabled, Expect command to still fire', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -305,12 +305,12 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeTruthy();
   });
 
-  test('Given a different command is disabled with this one, Expect command to not fire', async () => {
+  test('Given a different command is disabled with this one, Expect command to not fire', () => {
     process.env = {
       BOT_TOKEN: 'TOKEN',
       BOT_PREFIX: '!',
@@ -335,7 +335,7 @@ describe('LoadCommand', () => {
   
     const util = new Util();
   
-    const result = await util.loadCommand("normal", [ "first" ], message);
+    const result = util.loadCommand("normal", [ "first" ], message);
   
     expect(result.valid).toBeFalsy();
     expect(result.message).toBe("Command is disabled");
