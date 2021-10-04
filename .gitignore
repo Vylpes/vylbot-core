@@ -113,3 +113,6 @@ events/
 
 # Linux Environment Files
 *.swp
+
+# macOS Environment Files
+.DS_Store
