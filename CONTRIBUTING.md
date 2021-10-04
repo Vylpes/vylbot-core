@@ -12,6 +12,8 @@ This project and everyone participating in it is governed by the VylBot Core Cod
 
 > **Note:** Please don't file an issue to ask a question. You'll get faster results by using the resources below.
 
+You can ask a question about the project by emailing us at `ethan@vylpes.com`.
+
 You can ask a question about the project in the `#development` channel in the [Discord Server](https://discord.gg/UyAhAVp).
 
 ## What you should know
@@ -30,7 +32,7 @@ There are a few conventions that have developed over time for this project. When
 
 We won't accept pull requests unless these checks pass. If yours fail, simply fix what the bot says until it passes and then get a repo member to review your code.
 
-The rules for the code is based upon [Vylpes' Config Repo](https://github.com/vylpes/config)
+The rules for the code is based upon [Vylpes' Config Repo](https://github.com/vylpes/Config)
 
 * Variable names should use **Camel Case**
 * Functions should put **braces on the same line**
@@ -117,26 +119,26 @@ Enhancement suggestions are tracked as GitHub issues. After you've determined th
 
 Unsure where to begin contributing to VylBot Core? You can start by looking through these `good first` and `help wanted` issues:
 
-* [Good first issue](https://github.com/GetGravitySoft/VylBot Core/labels/good%20first%20issue) - issues which should only require a few lines of code, and a test or two.
-* [Help wanted](https://github.com/GetGravitySoft/VylBot Core/labels/help%20wanted) - issues which should be a bit more involved than `good first` issues.
+* [Good first issue](https://github.com/vylpes/vylbot-core/labels/good%20first%20issue) - issues which should only require a few lines of code, and a test or two.
+* [Help wanted](https://github.com/vylpes/vylbot-core/labels/help%20wanted) - issues which should be a bit more involved than `good first` issues.
 
 #### Prerequisites
 
-In order to download necessary tools, clone the repository, and install dependencies via `npm` you need network access.
+In order to download necessary tools, clone the repository, and install dependencies via `yarn` you need network access.
 
 You'll need the following tools:
 
 * Git
 * NodeJS
 
-Install and build all of the dependencies using `npm`
+Install and build all of the dependencies using `yarn`
 
 ```bash
-cd VylBot Core
-npm install
-cp config.json.template config.json
+cd vylbot-core
+yarn install
+cp .env.template .env
 ```
-And then use your text editor of choice to fill in the `config.json` file.
+And then use your text editor of choice to fill in the `.env` file.
 
 #### Build and Run
 
@@ -145,15 +147,15 @@ If you want to understand how VylBot Core works or want to debug an issue, you'l
 First, fork the VylBot Core repository so that you can make a pull request. Then, clone your fork locally:
 
 ```bash
-git clone https://github.com/<your-github-account>/VylBot Core.git
+git clone https://github.com/<your-github-account>/vylbot-core.git
 ```
 
 Occasionally, you will want to merge changes in the upstream repository (the official code repo) with your fork.
 
 ```bash
-cd VylBot Core
+cd vylbot-core
 git checkout master
-git pull https://github.com/getgravitysoft/VylBot Core.git master
+git pull https://github.com/vylpes/vylbot-core.git master
 ```
 
 Manage any merge conflicts, commit them, and then push them to your fork.
@@ -193,21 +195,29 @@ All JavaScript code is linted with `eslint`.
 * Prefer arrow function parameters to have brackets `()` only when needed
 * Prefer arrow function arrows `=>` to have a space before and after it
 * Prefer `let` and `const` over `var`
+* Prefer template strings over string concatenation
+* Prefer comma at the end of the line
 
 As well as eslint's recommended defaults.
 
 Example
 
-```js
-function ban (member) {
-    let reason = "Example reason";
+```ts
+// hello.ts
+import { Command, ICommandContext } from "vylbot-core";
 
-    member.ban(reason).then(() => {
-        // handle then here
-    }).catch(err => {
-        // handle error here
-    });
-}# Contributing to VylBot Core
+export class hello extends Command {
+    constructor() {
+        super();
+    }
+
+    public override execute(context: ICommandContext) {
+        context.message.reply("Hello");
+    }
+}
+```
+
+# Contributing to VylBot Core
 
 First off, thanks for taking the time to contribute!
 
@@ -248,6 +258,8 @@ The rules for the code is based upon [Vylpes' Config Repo](https://github.com/vy
 * **Arrow parameters** should have brackets around them only when needed
 * **Arrow spacing** should have a space around the arrow (' => ')
 * **No var** should be used, instead use either let or const when appropriate
+* **Template Strings** should be used over string concatenation
+* **Comma Style** should have the commas separating items in a list at the end of the line
 
 ## How You Can Contribute
 
@@ -402,6 +414,8 @@ All JavaScript code is linted with `eslint`.
 * Prefer arrow function parameters to have brackets `()` only when needed
 * Prefer arrow function arrows `=>` to have a space before and after it
 * Prefer `let` and `const` over `var`
+* Prefer template strngs over string concatenation
+* Prefer commas separating items in a list to be at the end of the line
 
 As well as eslint's recommended defaults.
 
@@ -410,6 +424,11 @@ Example
 ```js
 function ban (member) {
     let reason = "Example reason";
+
+    let args = [
+        "one",
+        "two"
+    ];
 
     member.ban(reason).then(() => {
         // handle then here

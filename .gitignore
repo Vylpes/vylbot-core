@@ -106,8 +106,13 @@ dist
 # VylBot-Core Testing Files
 commands/
 events/
-bot.js
-config.json
+/bot.ts
+
+!tests/__mocks/commands
+!tests/__mocks/events
 
 # Linux Environment Files
 *.swp
+
+# macOS Environment Files
+.DS_Store
