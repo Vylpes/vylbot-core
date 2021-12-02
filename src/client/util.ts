@@ -95,11 +95,11 @@ export class Util {
 			
             for (let i = 0; i < eventFiles.length; i++) {
                 if (eventFiles[i].includes('.ts')) {
-					const eventName = eventFiles[i].split('.')[0];
+                    const eventName = eventFiles[i].split('.')[0];
 					
-                    const file = require(`${process.cwd()}/${folder}/${eventName}.ts`);
+                    const file = require(`${process.cwd()}/${folder}/${eventName}.ts`).default;
 					
-                    const event = new file[eventName]() as Event;
+                    const event = new file() as Event;
 					
 					// Load events
 					client.on('channelCreate', event.channelCreate);
